@@ -17,7 +17,7 @@ const login = () => {
         <div className="max-w-md">
 
           <div className="space-y-5 text-center">
-            <h1 className="text-2xl text-white font-bold">Login</h1>
+            <h1 className="text-5xl text-white font-bold">Login</h1>
             <p className="text-white lg:text-xl">Se você não tiver uma conta, você pode se <Link className="text-blue-500 font-bold" href="/register">registrar aqui!</Link></p>
           </div>
 
