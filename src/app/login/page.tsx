@@ -4,8 +4,10 @@ import Link from "next/link";
 
 import { useForm } from "react-hook-form";
 import { useState } from "react";
-import { z } from "zod";
-import { zodResolver } from "@hookform/resolvers/zod";
+import { yupResolver } from "@hookform/resolvers/yup";
+
+import { userLoginSchema } from "../../validations/login/userLogin";
+import { CreateUserFormatLogin } from "../../validations/login/typeUserLogin";
 
 import { IconContext } from "react-icons";
 
@@ -13,42 +15,10 @@ import { FaFacebook } from "react-icons/fa";
 import { IoLogoWhatsapp } from "react-icons/io";
 import { SiGmail } from "react-icons/si";
 import { InputComponent } from "~/components/InputComponent";
-
-const userLoginSchema = z.object({
-  email: z
-    .string()
-    .nonempty("O email é obrigatório")
-    .email("Formato de email inválido")
-    .toLowerCase()
-    .refine((email) => {
-      return email.endsWith("@gmail.com");
-    }, "O email precisa ser do Gmail")
-    .transform((email) => {
-      return email.trim();
-    }),
-  password: z
-    .string()
-    .min(8, "A senha deve ter no mínimo 8 caracteres")
-    .nonempty("A sennha é obrigatório"),
-  isRemember: z.boolean(),
-});
-
-type CreateUserFormat = z.infer<typeof userLoginSchema>;
+import useLoginForm from "~/hooks/useLoginForm";
 
 const login = () => {
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<CreateUserFormat>({
-    resolver: zodResolver(userLoginSchema),
-  });
-
-  const [output, setOutput] = useState("");
-
-  function createUser(data: any) {
-    setOutput(JSON.stringify(data, null, 2));
-  }
+  const { register, createUser, errors, handleSubmit, output } = useLoginForm();
 
   return (
     <main className="flex min-h-screen items-center justify-center bg-zinc-800">
