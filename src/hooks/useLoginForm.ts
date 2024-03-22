@@ -17,8 +17,7 @@ const useLoginForm = () => {
   });
 
   const userLogin: SubmitHandler<CreateUserFormatLogin> = async (data: any) => {
-    const response = await api.signin("", "");
-    console.log(response);
+    await api.signin(data.email, data.password);
   };
 
   return { register, handleSubmit, errors, userLogin };
