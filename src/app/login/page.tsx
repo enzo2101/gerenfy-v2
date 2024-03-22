@@ -7,7 +7,7 @@ import { IconContext } from "react-icons";
 import { FaFacebook } from "react-icons/fa";
 import { IoLogoWhatsapp } from "react-icons/io";
 import { SiGmail } from "react-icons/si";
-import { InputComponent } from "~/components/InputComponent";
+import { InputComponent } from "~/components/InputLoginComponent";
 import useLoginForm from "~/hooks/useLoginForm";
 
 const login = () => {

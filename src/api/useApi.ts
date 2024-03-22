@@ -10,10 +10,17 @@ export const api = axios.create({
 
 export const useApi = () => ({
   signin: async (email: string, password: string) => {
-    const response = await api.post("/auth/login/", {
-      email,
-      password,
-    });
-    console.log(response.data)
+    try {
+      const response = await api.post("/auth/login/", {
+        email,
+        password,
+      });
+      if(response) {
+        return response.data;
+      }
+    }
+    catch (error) {
+      console.log(error);
+    }
   },
 });

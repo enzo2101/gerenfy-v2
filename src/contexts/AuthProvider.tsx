@@ -1,7 +1,7 @@
 "use client"
 
 import { useState } from "react";
-import { useApi } from "~/hooks/useApi";
+import { useApi } from "~/api/useApi";
 import { User } from "~/types/User";
 import { AuthContext } from "./AuthContext";
 
@@ -13,6 +13,11 @@ export const AuthProvider = ({ children }: { children: JSX.Element }) => {
     const data = await api.signin(email, password);
     if(data.user) {
       setUser(data.user);
+      setUser((prevUser) => {
+        console.log(prevUser);
+        return prevUser;
+      })
+      console.log(user);
       return true;
     }
     return false;

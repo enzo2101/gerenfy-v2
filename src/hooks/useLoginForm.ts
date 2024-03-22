@@ -1,13 +1,13 @@
 import { yupResolver } from "@hookform/resolvers/yup";
-import { useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { CreateUserFormatLogin } from "~/validations/login/typeUserLogin";
 import { userLoginSchema } from "~/validations/login/userLogin";
-import { useApi } from "../app/api/useApi";
-
-const api = useApi();   
+import { AuthContext } from "~/contexts/AuthContext";
+import { useContext } from "react";
 
 const useLoginForm = () => {
+  const auth = useContext(AuthContext);
+
   const {
     register,
     handleSubmit,
@@ -17,7 +17,7 @@ const useLoginForm = () => {
   });
 
   const userLogin: SubmitHandler<CreateUserFormatLogin> = async (data: any) => {
-    await api.signin(data.email, data.password);
+    const response = await auth.signIn(data.email, data.password)
   };
 
   return { register, handleSubmit, errors, userLogin };
