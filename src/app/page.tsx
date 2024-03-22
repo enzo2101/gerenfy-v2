@@ -1,15 +1,17 @@
 import Link from "next/link";
+import { AuthProvider } from "~/contexts/AuthProvider";
 
 export default async function Home() {
-
   return (
-    <main className="bg-zinc-800 h-screen">
-
-    </main>
+      <main className="h-screen bg-zinc-800">
+        
+      </main>
   );
 }
 
-{/*         <CrudShowcase /> */ }
+{
+  /*         <CrudShowcase /> */
+}
 /* async function CrudShowcase() {
   const latestPost = await api.post.getLatest();
 

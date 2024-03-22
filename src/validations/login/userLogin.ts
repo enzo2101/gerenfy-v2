@@ -2,7 +2,6 @@ import * as yup from "yup";
 
 import isEmailValidator from "validator/lib/isEmail";
 import { isStrongPassword } from "validator";
-import { CreateUserFormatLogin } from "./typeUserLogin"
 
 export const userLoginSchema = yup.object().shape({
   email: yup

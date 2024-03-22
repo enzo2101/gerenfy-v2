@@ -2,13 +2,6 @@
 
 import Link from "next/link";
 
-import { useForm } from "react-hook-form";
-import { useState } from "react";
-import { yupResolver } from "@hookform/resolvers/yup";
-
-import { userLoginSchema } from "../../validations/login/userLogin";
-import { CreateUserFormatLogin } from "../../validations/login/typeUserLogin";
-
 import { IconContext } from "react-icons";
 
 import { FaFacebook } from "react-icons/fa";
@@ -18,7 +11,7 @@ import { InputComponent } from "~/components/InputComponent";
 import useLoginForm from "~/hooks/useLoginForm";
 
 const login = () => {
-  const { register, createUser, errors, handleSubmit, output } = useLoginForm();
+  const { register, userLogin, errors, handleSubmit } = useLoginForm();
 
   return (
     <main className="flex min-h-screen items-center justify-center bg-zinc-800">
@@ -34,7 +27,7 @@ const login = () => {
             </p>
           </div>
 
-          <form onSubmit={handleSubmit(createUser)}>
+          <form onSubmit={handleSubmit(userLogin)}>
             <div className="pt-12">
               <div className="flex flex-col space-y-6">
                 <InputComponent
@@ -77,7 +70,7 @@ const login = () => {
                 Entrar
               </button>
             </div>
-            <pre>{output}</pre>
+
           </form>
 
           <div className="flex flex-col items-center justify-center space-y-6">

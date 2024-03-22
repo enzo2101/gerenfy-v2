@@ -1,8 +1,11 @@
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useState } from "react";
-import { useForm } from "react-hook-form";
+import { SubmitHandler, useForm } from "react-hook-form";
 import { CreateUserFormatLogin } from "~/validations/login/typeUserLogin";
 import { userLoginSchema } from "~/validations/login/userLogin";
+import { useApi } from "../app/api/useApi";
+
+const api = useApi();   
 
 const useLoginForm = () => {
   const {
@@ -13,12 +16,12 @@ const useLoginForm = () => {
     resolver: yupResolver(userLoginSchema),
   });
 
-  const [output, setOutput] = useState("");
+  const userLogin: SubmitHandler<CreateUserFormatLogin> = async (data: any) => {
+    const response = await api.signin("", "");
+    console.log(response);
+  };
 
-  function createUser(data: any) {
-    setOutput(JSON.stringify(data, null, 2));
-  }
-  return { register, handleSubmit, errors, output, createUser };
+  return { register, handleSubmit, errors, userLogin };
 };
 
 export default useLoginForm;
