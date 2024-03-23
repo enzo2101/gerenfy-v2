@@ -18,6 +18,7 @@ export const AuthProvider = ({ children }: { children: JSX.Element }) => {
         try {
           const data: User = await api.validateToken(AccessToken);
           if (data) {
+            console.log(data)
             setUser(data);
           }
         } catch (error) {

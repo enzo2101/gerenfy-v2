@@ -10,7 +10,7 @@ import { SiGmail } from "react-icons/si";
 import { InputComponent } from "~/components/InputLoginComponent";
 import useLoginForm from "~/hooks/useLoginForm";
 
-const login = () => {
+const Login = () => {
   const { register, userLogin, errors, handleSubmit } = useLoginForm();
 
   return (
@@ -113,4 +113,4 @@ const login = () => {
   );
 };
 
-export default login;
+export default Login;
