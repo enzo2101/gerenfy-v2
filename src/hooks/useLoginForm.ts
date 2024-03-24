@@ -19,6 +19,7 @@ const useLoginForm = () => {
   });
 
   const userLogin: SubmitHandler<CreateUserFormatLogin> = async (data: any) => {
+    console.log(data.remember)
     const response = await auth.signIn(data.email, data.password);
     if(response) {
       router.push("/profile");

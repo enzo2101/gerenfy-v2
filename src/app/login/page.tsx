@@ -49,7 +49,7 @@ const Login = () => {
                       type="checkbox"
                       value=""
                       className="h-4 w-4 rounded border-gray-300 bg-transparent text-blue-600 focus:ring-2 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:ring-offset-gray-800 dark:focus:ring-blue-600"
-                      {...register("isRemember")}
+                      {...register("remember")}
                     />
                     <label
                       htmlFor="default-checkbox"

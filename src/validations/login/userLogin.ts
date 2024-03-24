@@ -20,6 +20,6 @@ export const userLoginSchema = yup.object().shape({
   password: yup
     .string()
     .min(8, "A senha deve ter no mínimo 8 caracteres"),
-  isRemember: yup.boolean(),
+  remember: yup.boolean(),
 });
 

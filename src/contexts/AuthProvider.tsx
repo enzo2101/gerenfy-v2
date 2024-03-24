@@ -18,7 +18,7 @@ export const AuthProvider = ({ children }: { children: JSX.Element }) => {
         try {
           const data: User = await api.validateToken(AccessToken);
           if (data) {
-            console.log(data)
+            console.log(data);
             setUser(data);
           }
         } catch (error) {
@@ -39,13 +39,25 @@ export const AuthProvider = ({ children }: { children: JSX.Element }) => {
     return false;
   };
 
+  const logOut = () => {
+    localStorage.removeItem("refreshToken");
+    localStorage.removeItem("accessToken");
+    if (
+      localStorage.getItem("refreshToken") === null ||
+      (undefined && localStorage.getItem("accessToken") === null) ||
+      undefined
+    ) {
+      return true;
+    }
+  };
+
   const setToken = (token: Tokens) => {
     localStorage.setItem("refreshToken", token.refresh);
     localStorage.setItem("accessToken", token.access);
   };
 
   return (
-    <AuthContext.Provider value={{ user, signIn }}>
+    <AuthContext.Provider value={{ user, signIn, logOut }}>
       {children}
     </AuthContext.Provider>
   );
