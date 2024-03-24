@@ -5,7 +5,7 @@ export type User = {
   is_active: boolean;
   avatar: {
     id: number;
-    max: string;
+    high: string;
     medium: string;
     low: string;
   },
