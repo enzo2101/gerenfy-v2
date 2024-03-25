@@ -18,7 +18,6 @@ export const AuthProvider = ({ children }: { children: JSX.Element }) => {
         try {
           const data: User = await api.validateToken(AccessToken);
           if (data) {
-            console.log(data);
             setUser(data);
           }
         } catch (error) {
@@ -29,14 +28,20 @@ export const AuthProvider = ({ children }: { children: JSX.Element }) => {
     validateToken();
   }, []);
 
-  const signIn = async (email: string, password: string) => {
-    const data = await api.signin(email, password);
-    if (data.user) {
-      setUser(data.user);
-      setToken(data.tokens);
+  const signIn = async (email: string, password: string, remember: boolean) => {
+    try {
+      const data = await api.signin(email, password);
+      if(data.user) {
+        setUser(data.user);
+        if (remember) {
+          setToken(data.tokens);
+          return true;
+        }
+      }
       return true;
+    } catch (error) {
+      throw error;
     }
-    return false;
   };
 
   const logOut = () => {
@@ -51,13 +56,17 @@ export const AuthProvider = ({ children }: { children: JSX.Element }) => {
     }
   };
 
+  const signUp = async (name: string, email: string, password: string) => {
+    return true;
+  };
+
   const setToken = (token: Tokens) => {
     localStorage.setItem("refreshToken", token.refresh);
     localStorage.setItem("accessToken", token.access);
   };
 
   return (
-    <AuthContext.Provider value={{ user, signIn, logOut }}>
+    <AuthContext.Provider value={{ user, signIn, logOut, signUp }}>
       {children}
     </AuthContext.Provider>
   );

@@ -8,28 +8,35 @@ import { FaFacebook } from "react-icons/fa";
 import { IoLogoWhatsapp } from "react-icons/io";
 import { SiGmail } from "react-icons/si";
 import { InputComponent } from "~/components/InputLoginComponent";
-import { useLoginForm } from "~/hooks/useLoginForm";
+import useRegisterForm from "~/hooks/useRegisterForm";
 
-const Login = () => {
-  const { register, userLogin, errors, handleSubmit } = useLoginForm();
+export default function Register() {
+  const { register, handleSubmit, errors, userRegister } = useRegisterForm();
 
   return (
-    <main className="flex min-h-screen items-center justify-center bg-zinc-800">
+    <div className="flex min-h-screen items-center justify-center bg-zinc-800">
       <div className="flex h-screen items-center p-6 lg:space-x-60">
         <div className="max-w-md">
           <div className="space-y-5 text-center">
             <h1 className="text-5xl font-bold text-white">Login</h1>
             <p className="text-white lg:text-xl">
-              Se você não tiver uma conta, você pode se{" "}
-              <Link className="font-bold text-blue-500" href="/register">
-                registrar aqui!
+              Se você não tiver uma conta, você pode{" "}
+              <Link className="font-bold text-blue-500" href="/login">
+                entrar aqui!
               </Link>
             </p>
           </div>
 
-          <form onSubmit={handleSubmit(userLogin)}>
+          <form onSubmit={handleSubmit(userRegister)}>
             <div className="pt-12">
-              <div className="flex flex-col space-y-6">
+              <div className="flex flex-col">
+                <InputComponent
+                  type="text"
+                  title="Insira o Nome"
+                  {...register("name")}
+                  className="peer block w-full appearance-none border-0 border-b-2 border-gray-300 bg-transparent px-0 py-2.5 text-sm text-gray-300 focus:border-blue-600 focus:outline-none focus:ring-0 dark:border-gray-600 dark:text-white dark:focus:border-blue-500"
+                  helperText={errors.name?.message}
+                />
                 <InputComponent
                   type="email"
                   title="Insira o Email"
@@ -37,30 +44,13 @@ const Login = () => {
                   className="peer block w-full appearance-none border-0 border-b-2 border-gray-300 bg-transparent px-0 py-2.5 text-sm text-gray-300 focus:border-blue-600 focus:outline-none focus:ring-0 dark:border-gray-600 dark:text-white dark:focus:border-blue-500"
                   helperText={errors.email?.message}
                 />
-                <div className="flex flex-col space-y-4">
-                  <InputComponent
-                    type="password"
+                <InputComponent
+                  type="password"
                   title="Insira a Senha"
-                    {...register("password")}
-                    className="peer block w-full appearance-none border-0 border-b-2 border-gray-300 bg-transparent px-0 py-2.5 text-sm text-gray-300 focus:border-blue-600 focus:outline-none focus:ring-0 dark:border-gray-600 dark:text-white dark:focus:border-blue-500"
-                    helperText={errors.password?.message}
-                  />
-                  <div className="mb-4 flex items-center">
-                    <input
-                      id="default-checkbox"
-                      type="checkbox"
-                      value=""
-                      className="h-4 w-4 rounded border-gray-300 bg-transparent text-blue-600 focus:ring-2 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:ring-offset-gray-800 dark:focus:ring-blue-600"
-                      {...register("remember")}
-                    />
-                    <label
-                      htmlFor="default-checkbox"
-                      className="ms-2 text-sm font-medium text-gray-300 dark:text-gray-300"
-                    >
-                      Lembrar senha
-                    </label>
-                  </div>
-                </div>
+                  {...register("password")}
+                  className="peer block w-full appearance-none border-0 border-b-2 border-gray-300 bg-transparent px-0 py-2.5 text-sm text-gray-300 focus:border-blue-600 focus:outline-none focus:ring-0 dark:border-gray-600 dark:text-white dark:focus:border-blue-500"
+                  helperText={errors.password?.message}
+                />
               </div>
             </div>
 
@@ -110,8 +100,6 @@ const Login = () => {
           />
         </div>
       </div>
-    </main>
+    </div>
   );
-};
-
-export default Login;
+}

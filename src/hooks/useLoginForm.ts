@@ -6,7 +6,7 @@ import { AuthContext } from "~/contexts/AuthContext";
 import { useContext } from "react";
 import { useRouter } from "next/navigation";
 
-const useLoginForm = () => {
+export const useLoginForm = () => {
   const auth = useContext(AuthContext);
   const router = useRouter();
 
@@ -19,8 +19,7 @@ const useLoginForm = () => {
   });
 
   const userLogin: SubmitHandler<CreateUserFormatLogin> = async (data: any) => {
-    console.log(data.remember)
-    const response = await auth.signIn(data.email, data.password);
+    const response = await auth.signIn(data.email, data.password, data.remember);
     if(response) {
       router.push("/profile");
     }
@@ -29,4 +28,3 @@ const useLoginForm = () => {
   return { register, handleSubmit, errors, userLogin };
 };
 
-export default useLoginForm;
